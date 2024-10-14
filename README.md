@@ -2,12 +2,12 @@
 
 ## Analisis Kebutuhan
 
-| **Aspek**              | **Kebutuhan Pengguna**                                                        | **Kebutuhan Administrator**                                                                  |
-| ---------------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| **Fungsionalitas**     | Mencari buku, melihat detail buku, peminjaman buku, melihat riwayat pinjam    | Mengelola stok buku, menambahkan/menyunting buku, memproses pengembalian, laporan peminjaman |
-| **Antarmuka Pengguna** | Desain yang bersih dan intuitif, navigasi mudah, daftar buku yang terstruktur | Dashboard yang mudah digunakan untuk mengelola buku dan transaksi peminjaman                 |
-| **Kinerja**            | Waktu loading yang cepat, pencarian buku yang responsif                       | Laporan kinerja sistem untuk memonitor aktivitas peminjaman dan pengembalian buku            |
-| **Keamanan**           | Proteksi data pribadi pengguna, histori peminjaman yang aman                  | Backup data secara berkala, akses terkontrol ke data sensitif (stok buku, data peminjaman)   |
+| **Aspek**              | **Kebutuhan Administrator**                                                                  |
+| ---------------------- | -------------------------------------------------------------------------------------------- |
+| **Fungsionalitas**     | Mengelola stok buku, menambahkan/menyunting buku, memproses pengembalian, laporan peminjaman   |
+| **Antarmuka Pengguna** | Dashboard yang mudah digunakan untuk mengelola buku dan transaksi peminjaman                   |
+| **Kinerja**            | Laporan kinerja sistem untuk memonitor aktivitas peminjaman dan pengembalian buku              |
+| **Keamanan**           | Backup data secara berkala, akses terkontrol ke data sensitif (stok buku, data peminjaman)     |
 
 ## Schema Tabel
 
@@ -30,17 +30,9 @@
 | kode_buku    | VARCHAR      | Kode unik buku (Primary Key) |
 | judul_buku   | VARCHAR(150) | Judul buku                   |
 | penulis      | VARCHAR(100) | Nama penulis buku            |
-| penerbit     | VARCHAR(100) | Nama penerbit buku           |
-| tahun_terbit | YEAR         | Tahun buku diterbitkan       |
-| id_kategori  | VARCHAR(50)  | ID kategori buku             |
+| kategori     | VARCHAR(50)  | Kategori                     |
 | stok_buku    | INT          | Jumlah buku yang tersedia    |
 
-## Table: kategori
-
-| Kolom         | Tipe Data   | Keterangan                |
-| ------------- | ----------- | ------------------------- |
-| id_kategori   | INT         | ID kategori (Primary Key) |
-| nama_kategori | VARCHAR(50) | Nama kategori             |
 
 ### Table: admin
 
@@ -65,7 +57,8 @@
 
 ## Table relation
 
-![Untitled (3)](https://github.com/user-attachments/assets/40bf0054-50fe-4e16-9700-1c439743bb96)
+![Untitled (4)](https://github.com/user-attachments/assets/e57c371d-a00e-4968-9748-bcfe4391b47d)
+
 
 ### Link Design
 
