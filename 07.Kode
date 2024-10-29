@@ -1,0 +1,190 @@
+Anggota_model.php
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Anggota_model extends CI_Model {
+
+    public function __construct() {
+        $this->load->database();
+    }
+
+    // Fungsi untuk menambah data anggota
+    public function create_anggota($data) {
+        return $this->db->insert('anggota', $data);
+    }
+
+    // Fungsi untuk mengambil semua data anggota
+    public function get_all_anggota() {
+        return $this->db->get('anggota')->result_array();
+    }
+
+    // Fungsi untuk mengambil data anggota berdasarkan NIS
+    public function get_anggota_by_nis($nis) {
+        return $this->db->get_where('anggota', ['nis' => $nis])->row_array();
+    }
+
+    // Fungsi untuk mengupdate data anggota
+    public function update_anggota($nis, $data) {
+        $this->db->where('nis', $nis);
+        return $this->db->update('anggota', $data);
+    }
+
+    // Fungsi untuk menghapus data anggota
+    public function delete_anggota($nis) {
+        $this->db->where('nis', $nis);
+        return $this->db->delete('anggota');
+    }
+}
+
+
+Anggota.php
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Anggota extends CI_Controller {
+
+    public function __construct() {
+        parent::__construct();
+        $this->load->model('Anggota_model');
+        $this->load->helper('url');
+    }
+
+    // Menampilkan semua data anggota
+    public function index() {
+        $data['anggota'] = $this->Anggota_model->get_all_anggota();
+        $this->load->view('anggota/index', $data);
+    }
+
+    // Menambah data anggota
+    public function create() {
+        if ($this->input->post()) {
+            $data = [
+                'nis' => $this->input->post('nis'),
+                'nama_anggota' => $this->input->post('nama_anggota'),
+                'alamat' => $this->input->post('alamat'),
+                'nomor_telepon' => $this->input->post('nomor_telepon'),
+                'email' => $this->input->post('email'),
+                'tanggal_daftar' => $this->input->post('tanggal_daftar'),
+                'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT)
+            ];
+            $this->Anggota_model->create_anggota($data);
+            redirect('anggota');
+        } else {
+            $this->load->view('anggota/create');
+        }
+    }
+
+    // Mengedit data anggota
+    public function edit($nis) {
+        $data['anggota'] = $this->Anggota_model->get_anggota_by_nis($nis);
+
+        if ($this->input->post()) {
+            $data = [
+                'nama_anggota' => $this->input->post('nama_anggota'),
+                'alamat' => $this->input->post('alamat'),
+                'nomor_telepon' => $this->input->post('nomor_telepon'),
+                'email' => $this->input->post('email'),
+                'tanggal_daftar' => $this->input->post('tanggal_daftar'),
+            ];
+
+            // Hanya update password jika ada input baru
+            if ($this->input->post('password')) {
+                $data['password'] = password_hash($this->input->post('password'), PASSWORD_BCRYPT);
+            }
+
+            $this->Anggota_model->update_anggota($nis, $data);
+            redirect('anggota');
+        } else {
+            $this->load->view('anggota/edit', $data);
+        }
+    }
+
+    // Menghapus data anggota
+    public function delete($nis) {
+        $this->Anggota_model->delete_anggota($nis);
+        redirect('anggota');
+    }
+}
+
+
+Views
+index.php
+<h1>Data Anggota</h1>
+<a href="<?= site_url('anggota/create'); ?>">Tambah Anggota</a>
+<table border="1">
+    <tr>
+        <th>NIS</th>
+        <th>Nama Anggota</th>
+        <th>Alamat</th>
+        <th>Nomor Telepon</th>
+        <th>Email</th>
+        <th>Tanggal Daftar</th>
+        <th>Aksi</th>
+    </tr>
+    <?php foreach ($anggota as $row): ?>
+    <tr>
+        <td><?= $row['nis']; ?></td>
+        <td><?= $row['nama_anggota']; ?></td>
+        <td><?= $row['alamat']; ?></td>
+        <td><?= $row['nomor_telepon']; ?></td>
+        <td><?= $row['email']; ?></td>
+        <td><?= $row['tanggal_daftar']; ?></td>
+        <td>
+            <a href="<?= site_url('anggota/edit/'.$row['nis']); ?>">Edit</a> |
+            <a href="<?= site_url('anggota/delete/'.$row['nis']); ?>"
+                onclick="return confirm('Apakah Anda yakin?');">Delete</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
+
+create.php
+<h1>Tambah Anggota</h1>
+<form action="<?= site_url('anggota/create'); ?>" method="post">
+    <label>NIS</label><br>
+    <input type="number" name="nis" required><br><br>
+
+    <label>Nama Anggota</label><br>
+    <input type="text" name="nama_anggota" required><br><br>
+
+    <label>Alamat</label><br>
+    <textarea name="alamat"></textarea><br><br>
+
+    <label>Nomor Telepon</label><br>
+    <input type="text" name="nomor_telepon"><br><br>
+
+    <label>Email</label><br>
+    <input type="email" name="email"><br><br>
+
+    <label>Tanggal Daftar</label><br>
+    <input type="date" name="tanggal_daftar" required><br><br>
+
+    <label>Password</label><br>
+    <input type="password" name="password" required><br><br>
+
+    <button type="submit">Simpan</button>
+</form>
+
+edit.php
+<h1>Edit Anggota</h1>
+<form action="<?= site_url('anggota/edit/'.$anggota['nis']); ?>" method="post">
+    <label>Nama Anggota</label><br>
+    <input type="text" name="nama_anggota" value="<?= $anggota['nama_anggota']; ?>" required><br><br>
+
+    <label>Alamat</label><br>
+    <textarea name="alamat"><?= $anggota['alamat']; ?></textarea><br><br>
+
+    <label>Nomor Telepon</label><br>
+    <input type="text" name="nomor_telepon" value="<?= $anggota['nomor_telepon']; ?>"><br><br>
+
+    <label>Email</label><br>
+    <input type="email" name="email" value="<?= $anggota['email']; ?>"><br><br>
+
+    <label>Tanggal Daftar</label><br>
+    <input type="date" name="tanggal_daftar" value="<?= $anggota['tanggal_daftar']; ?>" required><br><br>
+
+    <label>Password (Kosongkan jika tidak ingin mengubah)</label><br>
+    <input type="password" name="password"><br><br>
+
+    <button type="submit">Update</button>
+</form>
