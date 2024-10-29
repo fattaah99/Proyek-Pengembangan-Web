@@ -1,12 +1,13 @@
 <?php
 class User extends CI_Controller 
-{
-	public function __construct()
-	{
-		parent::__construct();
-		$this->load->model('M_user', 'model');
-		$this->table = 'user';
-	}
+{public $table; // Properti $table didefinisikan
+    
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('M_user', 'model');
+        $this->table = 'user'; // Properti $table diinisialisasi
+    }
 
 	public function add()
 	{
