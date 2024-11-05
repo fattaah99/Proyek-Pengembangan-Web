@@ -83,3 +83,4 @@ Schema tabel ini digunakan untuk aplikasi peminjaman buku yang memisahkan data a
    * Membuat halaman manajemen peminjaman buku
    * Membuat halaman login
 
+Dalam mengerjakan proyek ini kami mengupayakan untuk menyelesaikan proyek ini dengan hasil yang maksimal dengan membuat jadwal, saling berkoordinasi dengan satu tim, dan memenuhi target pada rencana kegiatan yang sudah dibuat.
