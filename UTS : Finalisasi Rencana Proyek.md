@@ -14,3 +14,51 @@ manajemen pengguna : Fitur untuk mengelola data pengguna aplikasi, termasuk mena
 manajemen buku : Fitur ini memungkinkan admin untuk menambahkan, mengedit, atau menghapus data buku yang tersedia dalam sistem. Admin dapat mengatur informasi buku seperti judul, penulis, deskripsi, kategori, dan status ketersediaan.
 manajemen peminjaman buku : Admin dapat mengelola data peminjaman yang meliputi melihat daftar buku yang sedang dipinjam, memverifikasi permintaan peminjaman atau pengembalian, serta mencatat tanggal peminjaman dan pengembalian buku. Fitur ini membantu admin dalam memantau aktivitas peminjaman secara efisien.
 login : Fitur login yang khusus untuk admin agar dapat mengakses dashboard dan fitur manajemen lainnya. Hanya admin yang terdaftar yang memiliki hak akses untuk masuk ke bagian ini, sehingga keamanan sistem lebih terjaga.
+
+
+
+#Schema Tabel
+Schema tabel ini digunakan untuk aplikasi peminjaman buku yang memisahkan data anggota, buku, admin, dan transaksi peminjaman. Berikut adalah penjelasan  masing-masing ke 4 tabel tersebut:
+#Table: anggota
+
+| Kolom          | Tipe Data    | Keterangan                      |
+| -------------- | ------------ | ------------------------------- |
+| nis            | INT          | Nomor Induk Siswa (Primary Key) |
+| nama_anggota   | VARCHAR(100) | Nama lengkap anggota            |
+| alamat         | TEXT         | Alamat anggota                  |
+| nomor_telepon  | VARCHAR(15)  | Nomor telepon anggota           |
+| email          | VARCHAR(100) | Email anggota                   |
+| tanggal_daftar | DATE         | Tanggal anggota mendaftar       |
+| password       | VARCHAR      | Password anggota                |
+
+### Table: buku
+
+| Kolom        | Tipe Data    | Keterangan                   |
+| ------------ | ------------ | ---------------------------- |
+| kode_buku    | VARCHAR      | Kode unik buku (Primary Key) |
+| judul_buku   | VARCHAR(150) | Judul buku                   |
+| penulis      | VARCHAR(100) | Nama penulis buku            |
+| kategori     | VARCHAR(50)  | Kategori                     |
+| stok_buku    | INT          | Jumlah buku yang tersedia    |
+
+
+### Table: admin
+
+| Kolom      | Tipe Data    | Keterangan                     |
+| ---------- | ------------ | ------------------------------ |
+| id_admin   | INT          | ID admin (Primary Key)         |
+| username   | VARCHAR(50)  | Username admin untuk login     |
+| password   | VARCHAR(255) | Password admin yang dienkripsi |
+| nama_admin | VARCHAR(100) | Nama lengkap admin             |
+
+### Table: peminjaman
+
+| Kolom                | Tipe Data | Keterangan                                         |
+| -------------------- | --------- | -------------------------------------------------- |
+| id_peminjaman        | INT       | ID peminjaman (Primary Key)                        |
+| id_admin             | INT       | ID admin (Foreign Key ke tabel `admin`)            |
+| nis                  | INT       | Nomor Induk Siswa (Foreign Key ke tabel `anggota`) |
+| kode_buku            | VARCHAR   | Kode buku (Foreign Key ke tabel `buku`)            |
+| tanggal_peminjaman   | DATE      | Tanggal peminjaman                                 |
+| tanggal_pengembalian | DATE      | Tanggal pengembalian                               |
+| status_peminjaman    | ENUM      | Status peminjaman ('dipinjam', 'dikembalikan')     |
