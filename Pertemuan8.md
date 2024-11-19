@@ -7,5 +7,7 @@
 
 ## Code
 * <a href='https://github.com/fattaah99/Proyek-Pengembangan-Web/blob/master/application/config/routes.php'>Routes</a>
-* 
+* <a href='https://github.com/fattaah99/Proyek-Pengembangan-Web/blob/master/application/models/Admin_model.php'>Admin Models</a>
+* <a href='https://github.com/fattaah99/Proyek-Pengembangan-Web/blob/master/application/controllers/Admin.php'>Admin Controllers</a>
+** <a href='https://github.com/fattaah99/Proyek-Pengembangan-Web/tree/master/application/views/Admin'>Admin Views</a>
 
