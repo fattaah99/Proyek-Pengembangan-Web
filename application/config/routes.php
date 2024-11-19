@@ -55,5 +55,7 @@ $route['anggota'] = 'anggota/index';
 $route['anggota/create'] = 'anggota/create';
 $route['anggota/edit/(:num)'] = 'anggota/edit/$1';
 $route['anggota/delete/(:num)'] = 'anggota/delete/$1';
+$route['admin'] = 'admin/index';
+$route['admin/create'] = 'admin/create';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
