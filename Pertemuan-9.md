@@ -15,6 +15,10 @@
 
 
 ## Code
+* <a href='https://github.com/fattaah99/Proyek-Pengembangan-Web/blob/master/application/controllers/MenuController.php'>Menu Controller</a>
+* <a href='https://github.com/fattaah99/Proyek-Pengembangan-Web/blob/master/application/views/menu_view.php'>Menu View</a>
+* <a href='https://github.com/fattaah99/Proyek-Pengembangan-Web/blob/master/application/controllers/Admin.php'>Admin Controllers</a>
+* <a href='https://github.com/fattaah99/Proyek-Pengembangan-Web/blob/master/application/config/routes.php'>Routes</a>
 
 
 
