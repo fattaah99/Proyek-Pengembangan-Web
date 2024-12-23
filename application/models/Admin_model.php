@@ -33,4 +33,7 @@ class Admin_model extends CI_Model {
         $this->db->where('id_admin', $id);
         return $this->db->delete('admin');
     }
+    public function get_admin($username) {
+        return $this->db->get_where('admin', ['username' => $username])->row_array();
+    }
 }

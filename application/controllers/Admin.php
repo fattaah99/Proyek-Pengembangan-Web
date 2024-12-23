@@ -7,11 +7,14 @@ class Admin extends CI_Controller {
         parent::__construct();
         $this->load->model('Admin_model');
         $this->load->helper('url');
+        $this->load->helper('auth_helper');
+        check_login(); // Pastikan pengguna sudah login
     }
 
     // Menampilkan semua data anggota
     public function index() {
         $data['admin'] = $this->Admin_model->get_all_admin();
+        $this->load->view('layout/nav'); // Include navigasi
         $this->load->view('admin/index', $data);
     }
 
@@ -23,10 +26,11 @@ class Admin extends CI_Controller {
                 'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
                 'nama_admin' => $this->input->post('nama_admin'),
                
-            ];
+            ]; 
             $this->Admin_model->create_admin($data);
             redirect('admin');
         } else {
+            $this->load->view('layout/nav'); // Include navigasi
             $this->load->view('admin/create');
         }
     }
@@ -50,13 +54,14 @@ class Admin extends CI_Controller {
             $this->Admin_model->update_admin($id_admin, $data);
             redirect('admin');
         } else {
+            $this->load->view('layout/nav'); // Include navigasi
             $this->load->view('admin/edit', $data);
         }
     }
 
-    // // Menghapus data anggota
-    // public function delete($nis) {
-    //     $this->Anggota_model->delete_anggota($nis);
-    //     redirect('anggota');
-    // }
+    // Menghapus data anggota
+    public function delete($id_admin) {
+        $this->Admin_model->delete_admin($id_admin);
+        redirect('admin');
+    }
 }
