@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-// $route['default_controller'] = 'auth/login';
+$route['default_controller'] = 'bukuuser/index';
 $route['dashboard'] = 'dashboard/index';
 $route['auth/login'] = 'auth/login';
 // $route['testdb'] = 'TestDB';
@@ -60,6 +60,7 @@ $route['anggota/delete/(:num)'] = 'anggota/delete/$1';
 $route['admin'] = 'admin/index';
 $route['admin/create'] = 'admin/create';
 $route['buku'] = 'buku/index';
+$route['bukuuser'] = 'bukuuser/index';
 $route['buku/create'] = 'buku/create';
 $route['buku/edit'] = 'buku/edit';
 $route['peminjaman'] = 'peminjaman/index';

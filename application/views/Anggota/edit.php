@@ -14,7 +14,7 @@
         <div class="p-4 sm:ml-64">
             <div class="p-4 border-2 border-gray-200 border-solid rounded-lg dark:border-gray-700 mt-14">
                 <div class="font-bold text-2xl underline-offset-8">
-                    <h2 class="font-bold text-2xl">Input Anggota</h2>
+                    <h2 class="font-bold text-2xl">Edit Anggota</h2>
                 </div>
                 <div>
                     <hr class="w-full h-1 my-3 bg-gray-200 border-0 rounded dark:bg-black-700" width="100%" />
